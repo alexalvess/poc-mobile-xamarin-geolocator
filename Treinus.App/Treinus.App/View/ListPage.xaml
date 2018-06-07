@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             xmlns:local="clr-namespace:Treinus.App"
+             xmlns:view="clr-namespace:Treinus.App.View.Card;assembly=Treinus.App"
+             xmlns:render="clr-namespace:Treinus.App.Controls;assembly:Treinus"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="Treinus.App.View.ListPage"
+             Title="Treinus"
+             BackgroundColor="#FFFFFF">
+    <ContentPage.Content>
+        <Grid RowSpacing="10" Padding="15,10,15,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand">
+                <Label Text="Estabelecimentos encontrados"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#22a8ff"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand">
+
+                <ListView ItemsSource="{Binding PlaceList}" HasUnevenRows="true" SelectedItem="{Binding Place}">
+                    <ListView.ItemTemplate SeparatorVisibility="None">
+                        <DataTemplate>
+                            <render:CustomViewCell>
+                                <view:PlaceListTemplate/>
+                            </render:CustomViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

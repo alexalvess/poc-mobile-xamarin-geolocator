@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:render="clr-namespace:Treinus.App.Controls;assembly:Treinus"
+             xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms" 
+             xmlns:samples="clr-namespace:Xamarin.RangeSlider.Forms.Samples;assembly=Xamarin.RangeSlider.Forms.Samples"
+             x:Class="Treinus.App.View.FilterPage"
+             Title="Treinus"
+             BackgroundColor="#FFFFFF">
+    <ContentPage.Content>
+        <Grid RowSpacing="10" Padding="15,10,15,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="180"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0">
+                <Image Source="treinus.png"
+                       HeightRequest="180"
+                       WidthRequest="180"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1">
+                <Grid RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Grid.Row="0">
+                        <Label Text="Clique no ícone para buscarmos sua localização"
+                               TextColor="#22a8ff"
+                               FontSize="14"
+                               HorizontalTextAlignment="Start"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Grid ColumnSpacing="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="25"/>
+                            </Grid.ColumnDefinitions>
+
+                            <render:CustomEntry Grid.Column="0"
+                                   HorizontalTextAlignment="Start"
+                                   HorizontalOptions="FillAndExpand"
+                                   Text="{Binding Filter.Address, Mode=TwoWay}"
+                                   IsEnabled="False"
+                                   BackgroundColor="LightGray"/>
+
+                            <Image Grid.Column="1"
+                                   Source="placeholder.png"
+                                   HeightRequest="25"
+                                   WidthRequest="25">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding LocationCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1">
+                        <Label Text="Distância para realizar busca (Km)"
+                               TextColor="#22a8ff"
+                               FontSize="14"
+                               HorizontalTextAlignment="Start"
+                               HorizontalOptions="FillAndExpand"/>
+
+                        <forms:RangeSlider x:Name="RangeSlider" 
+                                ShowTextAboveThumbs="True"
+                                MaxThumbHidden="True"
+                                TextSize="14"
+                                ActiveColor="#22a8ff"
+                                StepValue="1" 
+                                MinimumValue="1" 
+                                MaximumValue="50" 
+                                LowerValue="{Binding Filter.Distance, Mode=TwoWay}" 
+                                UpperValue="50" 
+                                StepValueContinuously="False"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="Center"/>
+
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Grid.Column="1">
+                                <Button HorizontalOptions="FillAndExpand"
+                                        BackgroundColor="#22a8ff"
+                                        BorderRadius="10"
+                                        FontSize="16"
+                                        Text="-"
+                                        TextColor="#FFF"
+                                        Command="{Binding DecreaseCommand}"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="2">
+                                <Label FontSize="16"
+                                       BindingContext="{x:Reference Name=RangeSlider}" 
+                                       Text="{Binding LowerValue, StringFormat='{0:F1} Km'}"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="CenterAndExpand"
+                                       TextColor="#22a8ff"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="3">
+                                <Button HorizontalOptions="FillAndExpand"
+                                        BackgroundColor="#22a8ff"
+                                        BorderRadius="10"
+                                        Text="+"
+                                        FontSize="16"
+                                        TextColor="#FFF"
+                                        Command="{Binding IncreaseCommand}"/>
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+
+            <StackLayout Grid.Row="3">
+                <Button Text="Pesquisar"
+                        WidthRequest="200"
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        BorderRadius="10"
+                        VerticalOptions="Center"
+                        BackgroundColor="#22a8ff"
+                        TextColor="#FFF"
+                        Command="{Binding FilterCommand}"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

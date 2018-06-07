@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Treinus.App.View.MapPage"
+             xmlns:render="clr-namespace:Treinus.App.Controls;assembly:Treinus"
+             Title="Treinus"
+             BackgroundColor="#FFF">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="0" IsClippedToBounds="True" BackgroundColor="#FFF">
+                <Frame.OutlineColor>
+                    <OnPlatform x:TypeArguments="Color" Android="Gray" iOS="Gray"/>
+                </Frame.OutlineColor>
+                <Frame.Margin>
+                    <OnPlatform x:TypeArguments="Thickness" Android="10" iOS="10"/>
+                </Frame.Margin>
+
+                <StackLayout 
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand"
+                         Padding="5, 5, 5, 5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Grid.Column="0">
+                            <Image Source="{Binding Place.Icon}"
+                               WidthRequest="100"
+                               HeightRequest="100"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1" 
+                                     Orientation="Vertical"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="EndAndExpand">
+                            <Label Text="{Binding Place.Name}"
+                               TextColor="Black"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+
+                            <Label Text="{Binding Place.Vicinity}"
+                                   Margin="0,5,0,0"
+                                   TextColor="Black"
+                                   FontSize="14"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Grid.Row="1">
+                <render:CustomMap x:Name="customMap" MapType="Street" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

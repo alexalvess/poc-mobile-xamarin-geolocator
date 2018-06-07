@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Treinus.App.View.Card.PlaceListTemplate"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             xmlns:render="clr-namespace:Treinus.App.Controls;assembly:Treinus"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations">
+    
+  <ContentView.Content>
+        <Frame IsClippedToBounds="True" BackgroundColor="#FFF">
+            <Frame.OutlineColor>
+                <OnPlatform x:TypeArguments="Color" Android="Gray" iOS="Gray"/>
+            </Frame.OutlineColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness" Android="10" iOS="10"/>
+            </Frame.Margin>
+
+            <StackLayout>
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.Column="0">
+                        <ffimageloading:CachedImage HorizontalOptions="Center" 
+                                                    VerticalOptions="Center"
+			                                        WidthRequest="80" 
+                                                    HeightRequest="80"
+                                                    CacheDuration="90"
+                                                    DownsampleToViewSize="True"
+                                                    ErrorPlaceholder="error.png"
+                                                    LoadingPlaceholder="loading.png"
+			                                        Source="{Binding Icon, Mode=TwoWay}">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation BorderSize="3" BorderHexColor="#22a8ff"/>
+                            </ffimageloading:CachedImage.Transformations>
+                        </ffimageloading:CachedImage>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="FillAndExpand">
+                        <Grid RowSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="18"/>
+                                <RowDefinition Height="18"/>
+                            </Grid.RowDefinitions>
+
+                            <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding FormatName}"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>    
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="1" 
+                                         HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding FormatDisntace}"
+                                       TextColor="#22a8ff"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Start"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="2"
+                                         HorizontalOptions="FillAndExpand">
+                                <Grid RowSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Grid.Column="0"
+                                                 Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 VerticalOptions="End">
+                                        <Image Source="star.png"
+                                               WidthRequest="14"
+                                               HeightRequest="14"/>
+
+                                        <Label Text="{Binding FormatRating}"
+                                               Margin="5,0,0,0"
+                                               TextColor="#000"
+                                               FontSize="14"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Center"/>
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Column="1"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 VerticalOptions="End">
+                                        <Label Text="{Binding FormatOpen}"
+                                               FontSize="14"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"
+                                               TextColor="{Binding FormatOpenColor}"/>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </Frame>
+  </ContentView.Content>
+    
+</ContentView>
